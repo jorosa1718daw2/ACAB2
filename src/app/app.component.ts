@@ -9,22 +9,21 @@ import { HttpErrorResponse } from '@angular/common/http/src/response';
 })
 export class AppComponent {
   title = 'app';
-  results = '';
-
-
+  results: string[];
 
   constructor(private http: HttpClient) {
+    this.getUser();
   }
 
-
-  //getUsers(): void {
-  ngOnInit(): void {
+  getUser(): void {
     this.http.get<UserResponse>('http://localhost:3000/users').subscribe(data => {
       console.log(data);
-      console.log("Email: " + data.email);
-      console.log("ID : " + data.id);
-      console.log("Password: " + data.password);
-      console.log("User login: " + data.username);
+      this.results = data['results'];
+      for(let i in data){
+      console.log("Email: " + data[i].email);
+      console.log("ID : " + data[i].id);
+      console.log("Password: " + data[i].password);
+      console.log("User login: " + data[i].username);}
     },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -40,6 +39,7 @@ export class AppComponent {
       password: string;
       email: string;
     }
+  
   }
 
 
