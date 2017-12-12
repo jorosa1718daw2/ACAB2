@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 
+interface UserResponse {
+  id: number;
+  username: string;
+  password: string;
+  email: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,16 +16,16 @@ import { HttpErrorResponse } from '@angular/common/http/src/response';
 })
 export class AppComponent {
   title = 'app';
-  results: string[];
+  results: Array<UserResponse>;
 
   constructor(private http: HttpClient) {
     this.getUser();
   }
 
   getUser(): void {
-    this.http.get<UserResponse>('http://localhost:3000/users').subscribe(data => {
+    this.http.get<UserResponse[]>('http://localhost:3000/users').subscribe(data => {
       console.log(data);
-      this.results = data['results'];
+      this.results = data;//['results'];
       for(let i in data){
       console.log("Email: " + data[i].email);
       console.log("ID : " + data[i].id);
@@ -33,12 +40,7 @@ export class AppComponent {
         }
       });
 
-    interface UserResponse {
-      id: number;
-      username: string;
-      password: string;
-      email: string;
-    }
+    
   
   }
 
