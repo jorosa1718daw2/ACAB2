@@ -17,7 +17,6 @@ interface UserResponse {
 export class AppComponent {
   title = 'app';
   results: Array<UserResponse>;
-
   constructor(private http: HttpClient) {
     this.getUser();
   }
@@ -39,12 +38,7 @@ export class AppComponent {
           console.log("Sever-side Error Ocurred")
         }
       });
-
-    
-  
   }
-
-
 }
 
 
