@@ -1,3 +1,17 @@
-<p>
-  contaminants works!
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nom Contaminant</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of contaminants">
+      <th>{{item.id_contaminant_d}}</th>
+      <td>{{item.nom_contaminant_d}}</td>
+ 
+    </tr>
+  </tbody>
+</table>
+
