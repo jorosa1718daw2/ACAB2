@@ -25,7 +25,7 @@ export class ContaminantsComponent {
   getContaminants(): void {
     this.http.get<ContaminantResponse[]>('http://localhost:3000/contaminants')
       .subscribe(data => {
-        console.log(data);
+        //console.log(data);
         this.contaminants = data;
     
       },

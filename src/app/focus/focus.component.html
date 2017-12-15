@@ -1,3 +1,22 @@
-<p>
-  focus works!
-</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Codi</th>
+        <th scope="col">Tag</th>
+        
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of focus">
+        <th>{{ item.id_focus }}</th>
+        <td>{{ item.codi }}</td>
+        <td>{{ item.tag }}</td>
+   
+      </tr>
+    </tbody>
+  </table>
+  
+  
