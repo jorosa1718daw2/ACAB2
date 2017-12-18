@@ -1,0 +1,27 @@
+<table class="table table-hover table-sm table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Focus</th> <!-- nombre focus -->
+      <th scope="col">Analitzador</th> <!-- model analitzador -->
+      <th scope="col">Sensor</th> <!-- Id sensor -->
+      <th scope="col">Contaminant</th> <!-- name contaminant -->
+      <th scope="col">Unitat</th><!-- unitat-name contaminant -->
+      <th scope="col">Valor</th><!-- valor contaminant -->
+      <th scope="col">Estat</th><!-- state (analyzer) -->
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of focuscontaminant">
+      <!--<th>{{ item.id_focus }}</th>-->
+      <td>{{ item.name }}</td>
+      <td>{{ item.focusId }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      
+ 
+    </tr>
+  </tbody>
+</table>
+

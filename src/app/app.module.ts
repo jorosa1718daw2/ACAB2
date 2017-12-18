@@ -14,6 +14,7 @@ import { ContaminantsComponent } from './contaminants/contaminants.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { UsersComponent } from './users/users.component';
 import { RouteComponent } from './route/route.component';
+import { FocusContaminantComponent } from './focus-contaminant/focus-contaminant.component';
 
 const route: Routes =[
   {path: '', redirectTo: '/app', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const route: Routes =[
   {path: 'users', component: UsersComponent},
   {path: 'contaminants', component: ContaminantsComponent},
   {path: 'focus', component: FocusComponent},
+  {path: 'focuscontaminant', component: FocusContaminantComponent},
   
 ];
 
@@ -31,7 +33,8 @@ const route: Routes =[
     FocusComponent,
     ContaminantsComponent,
     UsersComponent,
-    RouteComponent
+    RouteComponent,
+    FocusContaminantComponent
   ],
   imports: [
     BrowserModule,
