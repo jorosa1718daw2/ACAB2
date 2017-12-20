@@ -5,8 +5,6 @@ import { MatCard } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // import moment = require('moment'); AppModule
 
-
-
 enum StatusCode { };
 
 interface IdName {
@@ -19,6 +17,7 @@ interface AnalogData {
   timeStamp: string; //moment.Moment | Date
   value: number;
   sensorId: number;
+  statusCode: number;
 };
 interface Sensor {
   id: number;
@@ -27,6 +26,7 @@ interface Sensor {
   unitId: number;
   measuringComponentId: number;
   analyzerId: number;
+  currentValue?: AnalogData;
 };
 interface Analyzer {
   id: number;
@@ -36,6 +36,7 @@ interface Analyzer {
   statusCode: StatusCode;
   sensors: Array<Sensor>;
   focusId: number;
+  state?: any;
 };
 interface Focus {
   id: number;
@@ -51,16 +52,14 @@ interface Focus {
 })
 export class Focus_Component {
   focuses: Array<Focus>
-  analyzers: Array<Analyzer>;
-  sensors: Array<Sensor>;
   //measurements: Array<AnalogData>;
 
   constructor(private http: HttpClient) {
     this.focuses = [];
-    this.analyzers = [];
-    this.sensors = [];
     //this.measurements = []; // aqui se mostraran los valores (historicos y tiempo real)
     this.getFocuses();
+    
+    
   }
 
   getFocuses(): void { // port: 63390
@@ -68,6 +67,18 @@ export class Focus_Component {
       .subscribe(data => {
 
         this.focuses = data; //.slice(0); // copia x valor
+        this.focuses.forEach((focus: Focus) => {
+          focus.analyzers.forEach((analyzer: Analyzer) => {
+            analyzer.sensors.forEach((sensor: Sensor) => {
+              sensor.currentValue = {
+                timeStamp: '2017-01-01',
+                value: 10.15,
+                sensorId: sensor.id,
+                statusCode: 1
+              };
+            });
+          })
+        });
         /*if (Array.isArray(this.focuses) && this.focuses.length) {
           this.analyzers
         }
@@ -86,9 +97,16 @@ export class Focus_Component {
 
   // Este tambien devolvera un array, pero solo con 1 posicion
   getSensorActualValue(sensorId: number): void {
-    this.http.get< Array<AnalogData> >('http://192.168.10.12:63390/api/sensor/:id/currentanalogdata')
+    this.http.get< Array<AnalogData> >('http://192.168.10.12:63390/api/sensor/'+sensorId+'/currentanalogdata')
     .subscribe(data => {
-        //this.measurements = data;
+        this.analogdata = data;
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log("Client-Side Error Ocurred")
+        } else {
+          console.log("Server-side Error Ocurred")
+        }
     });
   }
 

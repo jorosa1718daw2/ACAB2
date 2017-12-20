@@ -12,22 +12,27 @@
     <div style="text-align: center;" fxFlex="33">Focus</div>
     <div style="text-align: center;" fxFlex="33">Analitzador</div>
     <div style="text-align: center;" fxFlex="33">Sensor</div>
+    <div style="text-align: center;" fxFlex="33">Estat Actual</div>
   </mat-toolbar>
   <div class="focus-list">
-      <div *ngFor="let focus of focuses" fxLayout="row" fxFill fxLayoutAlign="stretch">
+      <div *ngFor="let focus of focuses" fxLayout="row" >
         <mat-card class="focus" fxFlex="33">
             {{ focus.name }}
         </mat-card>
         <div *ngFor="let analyzer of focus.analyzers" fxLayout="row" fxFlex>
-          <mat-card class="analyzer" fxFlex="50">
+          <mat-card class="analyzer" fxFlex>
               {{ analyzer.manufacturer +' - '+ analyzer.model }}
           </mat-card>
           <div *ngFor="let sensor of analyzer.sensors" fxFlex>
             <mat-card class="sensor" fxFlex>
-                id: {{ sensor.sensorId }}
-                name: {{ sensor.measuringComponent.name }}
-                units: {{ sensor.unit.name }}
+            {{ sensor.measuringComponent.name }}-{{ sensor.unit.name }}
+            {{ sensor.currentValue.value }}
             </mat-card>
+            <div *ngFor="let  of " fxFlex>
+                <mat-card class="sensor" fxFlex>
+                something
+                </mat-card>
+              </div>
           </div>
         </div>
       </div>
