@@ -1,0 +1,6 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.focus, .analyzer, .sensor {
+    padding: 10px;
+    margin: 5px;
+}

@@ -9,32 +9,30 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 ////////////////////////////////////////////////////////////
 
 import { AppComponent } from './app.component';
-import { FocusComponent } from './focus/focus.component';
-import { ContaminantsComponent } from './contaminants/contaminants.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import { UsersComponent } from './users/users.component';
 import { RouteComponent } from './route/route.component';
 import { FocusContaminantComponent } from './focus-contaminant/focus-contaminant.component';
+import { Focus_Component } from './focus_/focus_.component';
+import {
+  MatCardModule,
+  MatPaginatorModule,
+  MatToolbarModule,
+  MatListModule
+} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const route: Routes =[
   {path: '', redirectTo: '/app', pathMatch: 'full'},
   {path: 'app', component: AppComponent},
-  {path: 'users', component: UsersComponent},
-  {path: 'contaminants', component: ContaminantsComponent},
-  {path: 'focus', component: FocusComponent},
-  {path: 'focuscontaminant', component: FocusContaminantComponent},
+  {path: 'focus_', component: Focus_Component},
   
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-   
-    FocusComponent,
-    ContaminantsComponent,
-    UsersComponent,
     RouteComponent,
-    FocusContaminantComponent
+    Focus_Component
   ],
   imports: [
     BrowserModule,
@@ -43,11 +41,24 @@ const route: Routes =[
     RouterModule.forRoot(route),
     MatTabsModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    NoopAnimationsModule,
+
+    MatCardModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatListModule,
+    FlexLayoutModule
   ],
   exports:[ 
     RouterModule,
-    MatTabsModule
+    MatTabsModule,
+
+    MatCardModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatListModule,
+    FlexLayoutModule
    ],
   providers: [],
   bootstrap: [RouteComponent],

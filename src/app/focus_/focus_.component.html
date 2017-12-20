@@ -1,0 +1,78 @@
+<div class="container">
+  <!--div>
+      Focus
+      Analitzador
+      Sensor
+      Contaminant
+      Unitat
+      Valor
+      Estat
+  </div-->
+  <mat-toolbar color="primary">
+    <div style="text-align: center;" fxFlex="33">Focus</div>
+    <div style="text-align: center;" fxFlex="33">Analitzador</div>
+    <div style="text-align: center;" fxFlex="33">Sensor</div>
+  </mat-toolbar>
+  <div class="focus-list">
+      <div *ngFor="let focus of focuses" fxLayout="row" fxFill fxLayoutAlign="stretch">
+        <mat-card class="focus" fxFlex="33">
+            {{ focus.name }}
+        </mat-card>
+        <div *ngFor="let analyzer of focus.analyzers" fxLayout="row" fxFlex>
+          <mat-card class="analyzer" fxFlex="50">
+              {{ analyzer.manufacturer +' - '+ analyzer.model }}
+          </mat-card>
+          <div *ngFor="let sensor of analyzer.sensors" fxFlex>
+            <mat-card class="sensor" fxFlex>
+                id: {{ sensor.sensorId }}
+                name: {{ sensor.measuringComponent.name }}
+                units: {{ sensor.unit.name }}
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      <!--mat-card *ngFor="let focus of focuses">
+          {{ focus.name }}
+        <mat-card-content class="analyzer-list">
+
+          <mat-card *ngFor="let analyzer of focus.analyzers">
+            {{ analyzer.manufacturer +' - '+ analyzer.model }}
+            <mat-card-content class="sensor-list">
+
+              <mat-card *ngFor="let sensor of analyzer.sensors">
+                id: {{ sensor.sensorId }}
+                name: {{ sensor.measuringComponent.name }}
+                units: {{ sensor.unit.name }}
+
+              </mat-card>
+
+            </mat-card-content>
+          </mat-card>
+
+        </mat-card-content>
+      </mat-card-->
+    </div>
+
+  <!--ul class="focus-list">
+      <li *ngFor="let focus of focuses">
+        {{ focus.name }}
+        
+        <ul class="analyzer-list">
+          <li *ngFor="let analyzer of focus.analyzers">
+            {{ analyzer.manufacturer +' - '+ analyzer.model }}
+            
+            <ul class="sensor-list">
+              <li *ngFor="let sensor of analyzer.sensors">
+                id: {{ sensor.sensorId }}
+                name: {{ sensor.measuringComponent.name }}
+                units: {{ sensor.unit.name }}
+              </li>
+            </ul>
+  
+          </li>
+        </ul>
+  
+      </li>
+    </ul-->
+</div>
