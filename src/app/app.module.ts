@@ -20,6 +20,7 @@ import {
   MatListModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MomentModule } from 'angular2-moment/moment.module';
 
 const route: Routes =[
   {path: '', redirectTo: '/app', pathMatch: 'full'},
@@ -48,7 +49,8 @@ const route: Routes =[
     MatPaginatorModule,
     MatToolbarModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MomentModule
   ],
   exports:[ 
     RouterModule,
@@ -58,7 +60,8 @@ const route: Routes =[
     MatPaginatorModule,
     MatToolbarModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MomentModule
    ],
   providers: [],
   bootstrap: [RouteComponent],

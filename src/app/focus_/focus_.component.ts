@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { MatCard } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-// import moment = require('moment'); AppModule
+//import { MomentModule } from 'angular2-moment';
 
 enum StatusCode { };
 
@@ -20,7 +20,7 @@ interface AnalogData {
   statusCode: number;
 };
 interface Sensor {
-  id: number;
+  sensorId: number;
   measuringComponent: MeasuringComponent;
   unit: Unit;
   unitId: number;
@@ -65,25 +65,28 @@ export class Focus_Component {
   getFocuses(): void { // port: 63390
     this.http.get< Array<Focus> >('http://192.168.10.12/api/focus')
       .subscribe(data => {
-
-        this.focuses = data; //.slice(0); // copia x valor
-        this.focuses.forEach((focus: Focus) => {
+        let dummyAnalogCurrentData: AnalogData = {
+            timeStamp: '2017-01-01',//moment().format('YYYY-MM-DD'),
+            value: null,
+            sensorId: null,
+            statusCode: 0
+          };
+        this.focuses = data;
+        this.getSensorCV();
+        /*this.focuses.forEach((focus: Focus) => {
           focus.analyzers.forEach((analyzer: Analyzer) => {
             analyzer.sensors.forEach((sensor: Sensor) => {
-              sensor.currentValue = {
-                timeStamp: '2017-01-01',
-                value: 10.15,
-                sensorId: sensor.id,
-                statusCode: 1
-              };
+              this.getSensorActualValue(sensor.sensorId)
+                .subscribe((data: AnalogData) => {
+                  sensor.currentValue = data;
+                },
+                (err: HttpErrorResponse) => {
+                  console.log((err.error instanceof Error)?"Client-Side Error Ocurred":"Server-side Error Ocurred");
+                  sensor.currentValue = [dummyAnalogCurrentData].slice(0)[0];
+              });
             });
           })
-        });
-        /*if (Array.isArray(this.focuses) && this.focuses.length) {
-          this.analyzers
-        }
-        if (this.selectedFocus) this.selectedAnalyzer = this.selectedFocus[0];
-        if (this.selectedAnalyzer) this.selectedSensor = this.selectedAnalyzer[0];*/
+        });*/
 
       },
       (err: HttpErrorResponse) => {
@@ -95,11 +98,44 @@ export class Focus_Component {
       });
   }
 
+  getSensorCV() : void {
+    let sensors: Array<Sensor> = [],
+        dummyAnalogCurrentData: AnalogData = {
+          timeStamp: '2017-01-01',//moment().format('YYYY-MM-DD'),
+          value: null,
+          sensorId: null,
+          statusCode: 0
+        };
+    this.focuses.forEach((focus: Focus) => {
+      focus.analyzers.forEach((analyzer: Analyzer) => {
+        analyzer.sensors.forEach((sensor: Sensor) => {
+          sensors.push(sensor);
+        });
+      });
+    });
+    //var counter = 5;
+    setInterval(() => {
+      sensors.forEach((sensor) => {
+        this.getSensorActualValue(sensor.sensorId)
+          .subscribe((data: AnalogData) => {
+            sensor.currentValue = data;
+            //sensor.currentValue.value += counter;
+          },
+          (err: HttpErrorResponse) => {
+            console.log((err.error instanceof Error)?"Client-Side Error Ocurred":"Server-side Error Ocurred");
+            sensor.currentValue = [dummyAnalogCurrentData].slice(0)[0];
+        });
+      });
+      //counter += 5;
+      //if (counter > 100)  counter = 0;
+    },3000);
+  }
+
   // Este tambien devolvera un array, pero solo con 1 posicion
-  getSensorActualValue(sensorId: number): void {
-    this.http.get< Array<AnalogData> >('http://192.168.10.12:63390/api/sensor/'+sensorId+'/currentanalogdata')
-    .subscribe(data => {
-        this.analogdata = data;
+  getSensorActualValue(sensorId: number) : any {
+    return this.http.get<AnalogData>('http://192.168.10.12/api/sensor/'+sensorId+'/currentanalogdata');
+    /*.subscribe(data => {
+        return data;
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -107,7 +143,8 @@ export class Focus_Component {
         } else {
           console.log("Server-side Error Ocurred")
         }
-    });
+        return null;
+    });*/
   }
 
   // Mirar como pasar la fecha: Date | moment.Moment | string
