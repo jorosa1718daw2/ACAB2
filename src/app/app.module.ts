@@ -15,8 +15,7 @@ import { RouteComponent } from './route/route.component';
 import { FocusContaminantComponent } from './focus-contaminant/focus-contaminant.component';
 import { Focus_Component } from './focus_/focus_.component';
 import { LoginComponent } from './login/login.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { DialogOverviewExample, DialogOverviewExampleDialog } from './dialog-overview-exemple/dialog-overview-example'
+import { NavbarComponent, DialogOverviewExampleDialog } from './navbar/navbar.component';
 
 ////MATERIAL////
 import {
@@ -72,7 +71,6 @@ const route: Routes = [
     Focus_Component,
     LoginComponent,
     NavbarComponent,
-    DialogOverviewExample,
     DialogOverviewExampleDialog
   ],
   imports: [
@@ -132,7 +130,7 @@ const route: Routes = [
     MomentModule
     
   ],
-  entryComponents: [DialogOverviewExample, DialogOverviewExampleDialog],
+  entryComponents: [NavbarComponent, DialogOverviewExampleDialog],
   providers: [],
   bootstrap: [RouteComponent],
 

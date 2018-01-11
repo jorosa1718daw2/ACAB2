@@ -22,11 +22,13 @@
       <input type="password" name="password"
       class="form-control" id="exampleInputPassword1" placeholder="Password"/>
   </div>
-  <div>
-      <input type="submit" lass="btn btn-primary" value="Log In"/>
+  <div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.password" cdkFocusInitial>Ok</button>
   </div>
+   <!-- <div>
+    <input type="submit" lass="btn btn-primary" value="Log In"/>
+      <input type="button" lass="btn btn-primary" value="Cancel" (click)="onNoClick()"/>
+  </div>-->
 </form>
 
-<!-- Copyright 2017 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
