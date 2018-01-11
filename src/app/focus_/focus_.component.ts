@@ -128,7 +128,7 @@ export class Focus_Component {
       });
       //counter += 5;
       //if (counter > 100)  counter = 0;
-    },3000);
+    },10000);
   }
 
   // Este tambien devolvera un array, pero solo con 1 posicion
